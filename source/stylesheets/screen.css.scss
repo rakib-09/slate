@@ -74,7 +74,8 @@ html, body {
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    max-width: 100%;
+    max-width: 80%;
+    margin: auto;
     margin-bottom: $logo-margin;
   }
 
@@ -312,6 +313,19 @@ html, body {
 // CONTENT STYLES
 ////////////////////////////////////////////////////////////////////////////////
 // This is all the stuff with the light background in the left half of the page
+
+.content {
+  .center-column + pre {
+    position: static;
+    float: none;
+    clear: none;
+    margin: 0 28px;
+    left: 0;
+    margin-right: $examples-width !important;
+    border-radius: 0.5rem;
+    width: 70%;
+  }
+}
 
 .content {
   // fixes webkit rendering bug for some: see #538

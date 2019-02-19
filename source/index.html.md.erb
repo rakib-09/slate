@@ -1,0 +1,257 @@
+---
+title: API Reference
+toc_footers:
+  - <a href='https://jouleslabs.com/'>Documentation Powered by <br> JoulesLabs</a>
+
+includes:
+  - errors
+
+search: true
+---
+
+# Introduction
+
+Welcome to the WiAccount API! You can use our API to access Wi Eco-System API endpoints.
+We developed our system using RESTful APIs that we use OAuth 2.0 for authorization.
+All request and response bodies are formatted in JSON.
+
+# Authentication & authorization
+
+To Authenticate you have to use WiAccount API.
+The WiAccount REST API uses the OAuth 2.0 protocol to authorize calls. OAuth is an open standard that many companies use to provide secure access to protected resources.
+
+When you create an app,
+<code>
+  WiAccount generates a set of **OAuth client ID** and **secret Key** for your app.
+</code>
+
+Now, you have to hit in wiAccount <code>/oauth/authorize</code> with some specific keys for Authorization.
+<aside class="warning">
+You must replace <code>client_id</code> <code>redirect_uri</code> <code>device_id.</code>
+</aside>
+<aside class="notice">
+You must have to generate unique **<code>device_id</code>** for every login session and have to keep in session for further request.
+
+**<code>device_id</code>** at least 64 character long and must contain **numbers** and **letters** only.
+</aside>
+
+### Authorization
+Example in **PHP**
+
+<div class="center-column"></div>
+```php
+<?php
+use GuzzleHttp;
+
+$query = http_build_query([
+'client_id' => 'YOUR_CLIENT_ID',
+'redirect_uri' => 'YOUR_CALLBACK_URI',
+'response_type' => 'code',
+'device_id' => 'UNIQUE_DEVICE_ID',
+'device_info' => $_SERVER['HTTP_USER_AGENT'],
+'scope' => '',
+]);
+
+return redirect('http://account.witoken.global/oauth/authorize?' . $query);
+?>
+```
+You will get an **<code>authorization_code</code>** for the next login request.
+
+###Authentication
+After Authorization you have to send login request for your user.
+
+<div class="center-column"></div>
+```php
+<?php
+$http = new GuzzleHttp\Client;
+
+$response = $http->post('http://account.witoken.global/oauth/token', [
+'form_params' => [
+    'grant_type' => 'authorization_code',
+    'client_id' => 'YOUR_CLIENT_ID',
+    'client_secret' => 'YOUR_CLIENT_SECRET',
+    'redirect_uri' => 'YOUR_REDIRECT_URL',
+    'code' => 'AUTHORIZATION_CODE',
+    'device_id' => 'USER_DEVICE_ID',
+    'device_info' => $_SERVER['HTTP_USER_AGENT'],
+],
+]);
+?>
+```
+You will get **<code>Access_Token</code>** for further request.
+
+# Kittens
+
+## Get All Kittens
+<div class="center-column"></div>
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```
+<div class="center-column"></div>
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
+```
+<div class="center-column"></div>
+```shell
+curl "http://example.com/api/kittens"
+  -H "Authorization: meowmeowmeow"
+```
+<div class="center-column"></div>
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+```
+
+
+<div class="center-column"></div>
+The above command returns JSON structured like this:
+```json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+```
+
+This endpoint retrieves all kittens.
+
+### HTTP Request
+
+`GET http://example.com/api/kittens`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include_cats | false | If set to true, the result will also include cats.
+available | true | If set to false, the result will include kittens that have already been adopted.
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+## Get a Specific Kitten
+<div class="center-column"></div>
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
+<div class="center-column"></div>
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
+<div class="center-column"></div>
+```shell
+curl "http://example.com/api/kittens/2"
+  -H "Authorization: meowmeowmeow"
+```
+<div class="center-column"></div>
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
+```
+
+
+<div class="center-column"></div>
+The above command returns JSON structured like this:
+```json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+```
+
+This endpoint retrieves a specific kitten.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to retrieve
+
+## Delete a Specific Kitten
+<div class="center-column"></div>
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
+<div class="center-column"></div>
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
+<div class="center-column"></div>
+```shell
+curl "http://example.com/api/kittens/2"
+  -X DELETE
+  -H "Authorization: meowmeowmeow"
+```
+<div class="center-column"></div>
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.delete(2);
+```
+
+
+<div class="center-column"></div>
+The above command returns JSON structured like this:
+```json
+{
+  "id": 2,
+  "deleted" : ":("
+}
+```
+
+This endpoint deletes a specific kitten.
+
+### HTTP Request
+
+`DELETE http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to delete
+

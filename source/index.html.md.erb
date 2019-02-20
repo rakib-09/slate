@@ -15,7 +15,7 @@ Welcome to the WiAccount API! You can use our API to access Wi Eco-System API en
 We developed our system using RESTful APIs that we use OAuth 2.0 for authorization.
 All request and response bodies are formatted in JSON.
 
-# Authentication & authorization
+# Authentication & Authorization
 
 To Authenticate you have to use WiAccount API.
 The WiAccount REST API uses the OAuth 2.0 protocol to authorize calls. OAuth is an open standard that many companies use to provide secure access to protected resources.
@@ -80,178 +80,355 @@ $response = $http->post('http://account.witoken.global/oauth/token', [
 ```
 You will get **<code>Access_Token</code>** for further request.
 
-# Kittens
+# Public API
 
-## Get All Kittens
+## Get All Countries
+
+Get all countries from our table
+<aside class="success">
+**Method : GET**
+</aside>
+
 <div class="center-column"></div>
 ```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-<div class="center-column"></div>
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-<div class="center-column"></div>
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-<div class="center-column"></div>
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+countries/all
 ```
 
-
-<div class="center-column"></div>
 The above command returns JSON structured like this:
+
+<div class="center-column"></div>
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
+countries: [
+    {
+        country_id: 4,
+        country_name: "Afghanistan",
+        capital: "Kabul",
+        citizenship: "Afghan",
+        country_code: "4",
+        currency: "afghani",
+        currency_code: "AFN",
+        currency_sub_unit: "pul",
+        full_name: "Islamic Republic of Afghanistan",
+        short_name: "AF",
+        iso_3166_3: "AFG",
+        region_code: "142",
+        sub_region_code: "34",
+        eea: "False",
+        country_mobile_code: "93",
+        currency_symbol: "؋",
+        currency_decimals: 2,
+        flag: "AF.png"
+    }
 ]
 ```
 
-This endpoint retrieves all kittens.
+## Get Specific Country Information
 
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Get all countries from our table
+<aside class="notice">
+**Method : POST**
 </aside>
 
-## Get a Specific Kitten
 <div class="center-column"></div>
 ```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-<div class="center-column"></div>
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-<div class="center-column"></div>
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-<div class="center-column"></div>
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+country/:{code or id}
 ```
 
-
-<div class="center-column"></div>
 The above command returns JSON structured like this:
+
+<div class="center-column"></div>
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    country_id: 4,
+    country_name: "Afghanistan",
+    capital: "Kabul",
+    citizenship: "Afghan",
+    country_code: "4",
+    currency: "afghani",
+    currency_code: "AFN",
+    currency_sub_unit: "pul",
+    full_name: "Islamic Republic of Afghanistan",
+    short_name: "AF",
+    iso_3166_3: "AFG",
+    region_code: "142",
+    sub_region_code: "34",
+    eea: "False",
+    country_mobile_code: "93",
+    currency_symbol: "؋",
+    currency_decimals: 2,
+    flag: "AF.png"
+}
+```
+## Get Specific Country's Bank Information
+
+Get all Banks from Specific Country.
+<aside class="success">
+**Method : GET**
+</aside>
+
+<div class="center-column"></div>
+```ruby
+country/:{id}/banks
+```
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+[
+    {
+        "bank_id": 1,
+        "name": "Bangladesh Bank",
+        "country_id": 50,
+        "swift_code": "BANGLASWIFTCODE"
+    }
+]
+```
+
+## Get Specific Bank's Branches
+
+Get all Branches's from Specific Bank.
+<aside class="success">
+**Method : GET**
+</aside>
+
+<div class="center-column"></div>
+```ruby
+bank/{id}/branches
+```
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+[
+    {
+        "branch_id": 1,
+        "branch_name": "BD BANK Branch 1",
+        "bank_id": 1,
+        "address": "Some address",
+        "zip_code": 1230,
+        "swift_code": "BDBRANCH1",
+        "country_id": 50,
+        "country": {
+            "country_id": 50,
+            "country_name": "Bangladesh",
+            "capital": "Dhaka",
+            "citizenship": "Bangladeshi",
+            "country_code": "50",
+            "currency": "taka (inv.)",
+            "currency_code": "BDT",
+            "currency_sub_unit": "poisha (inv.)",
+            "full_name": "People’s Republic of Bangladesh",
+            "short_name": "BD",
+            "iso_3166_3": "BGD",
+            "region_code": "142",
+            "sub_region_code": "34",
+            "eea": "False",
+            "country_mobile_code": "880",
+            "currency_symbol": "BDT",
+            "currency_decimals": 2,
+            "flag": "BD.png"
+        }
+    }
+]
+```
+
+## Get all Banks
+
+Get all Banks.
+<aside class="success">
+**Method : GET**
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/banks
+```
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+{
+    "banks": [
+        {
+            "bank_id": 1,
+            "name": "Bangladesh Bank",
+            "country_id": 50,
+            "swift_code": "BANGLASWIFTCODE"
+        }
+    ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
+## Get User Status
+Check Any User is active logged in or not.
+<aside class="notice">
+**Method : POST**
+</aside>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
 <div class="center-column"></div>
 ```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-<div class="center-column"></div>
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-<div class="center-column"></div>
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-<div class="center-column"></div>
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+/user/status
 ```
 
+Parameter | Type | Description
+--------- | ------- | -----------
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
 
-<div class="center-column"></div>
 The above command returns JSON structured like this:
+
+<div class="center-column"></div>
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    "status": "active",
+    "user_id": 16
 }
 ```
 
-This endpoint deletes a specific kitten.
 
-### HTTP Request
+#API With Authentication
 
-`DELETE http://example.com/kittens/<ID>`
+## Get User Details
+<aside class="notice">
+Method : POST
+</aside>
 
-### URL Parameters
+<div class="center-column"></div>
+```ruby
+/details
+```
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+**Headers**
 
+Key | Value
+--------- | -------
+Accept | 'application/json'
+Content-type | 'application/json'
+Authorization | 'Bearer 'USER_ACCESS_TOKEN
+
+**Parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+{
+    "user_id": 32,
+    "first_name": "admin",
+    "last_name": "vai",
+    "date_of_birth": "2000-12-12",
+    "email": "admin@admin.com",
+    "avatar": "http://account.witoken.global/storage/users/images/dgZXn2WmbTCQGO5qmCyNHZv8mdTMn5I6sDSqK5xy.png",
+    "mobile_code": 65,
+    "mobile_no": 1234567890,
+    "zip_code": 1212,
+    "address": "50, DOHS, Mirpur",
+    "country": {
+        "country_id": 50,
+        "country_name": "Bangladesh",
+    },
+    "gender": "male",
+    "nid": "http://account.witoken.global/storage/users/images/4EYgq37ms1VodqCTxTdmulB6PQqkth2zOISUDHtB.png",
+    "status": 1,
+    "is_admin": 1,
+    "seller_status": null,
+    "seller_info": null,
+    "bank_info": [],
+    "approved_app": []
+}
+```
+
+## User Addresses
+<aside class="notice">
+Method : POST
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/user/addresses
+```
+
+**Headers**
+
+Key | Value
+--------- | -------
+Accept | 'application/json'
+Content-type | 'application/json'
+Authorization | 'Bearer 'USER_ACCESS_TOKEN
+
+**Parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+[
+    {
+        "id": 4,
+        "contact": "admin vai",
+        "user_id": 32,
+        "country_id": 50,
+        "country_name": "Bangladesh",
+        "zip_code": 1212,
+        "address": "50, DOHS, Mirpur",
+        "mobile_no": 1234567890,
+        "email": null,
+        "is_primary": 1,
+        "mobile_code": 65,
+        "title": ""
+    }
+]
+```
+
+## User Logout
+<aside class="notice">
+Method : POST
+</aside>
+
+<aside class="warning">
+  You must have to hit <code>/logout</code> before make logged out from your native app.
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/logout
+```
+
+**Headers**
+
+Key | Value
+--------- | -------
+Accept | 'application/json'
+Content-type | 'application/json'
+Authorization | 'Bearer 'USER_ACCESS_TOKEN
+
+**Parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
+user_id   | false | user id.
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+{
+    "status": "success",
+    "message": "Request completed successfully"
+}
+```

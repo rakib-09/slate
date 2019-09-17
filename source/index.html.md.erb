@@ -82,6 +82,87 @@ You will get **<code>Access_Token</code>** for further request.
 
 # Public API
 
+## User Register
+<aside class="notice">
+**Method : POST**
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/register
+```
+
+Parameter | Required | Description
+--------- | ------- | -----------
+device_id | Yes | user specific device_id.
+client_id | Yes | client_id which is assigned to that specific app.
+first_name | Yes | User first Name
+last_name | Yes | User last Name
+date_of_birth | No | User date of birth
+username | Yes | user name
+email | Yes | user email
+password | Yes | user password (should be 6+ character)
+password_confirmation | Yes | user password to confirm
+avatar | No | User Avatar
+nid | No | User National ID card
+mobile_no | Yes | User Mobile No
+mobile_code | Yes | Mobile Country Code
+country_id | Yes | Country ID (From our Country URL)
+zip_code | No | zip code
+gender | No | User Gender
+address | No | Address
+
+## Seller Register
+<aside class="notice">
+**Method : POST**
+</aside>
+
+<aside class="warning">
+<strong>Required Fields</strong> may vary depends of Seller Application Selection from our eco-system.
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/seller/register
+```
+
+Parameter | Required | Description
+--------- | ------- | -----------
+device_id | Yes | user specific device_id.
+client_id | Yes | client_id which is assigned to that specific app.
+first_name | Yes | User first Name
+last_name | Yes | User last Name
+date_of_birth | No | User date of birth
+username | Yes | user name
+email | Yes | user email
+password | Yes | user password (should be 6+ character)
+password_confirmation | Yes | user password to confirm
+avatar | No | User Avatar (Image)
+nid | No | User National ID card (Image)
+mobile_no | Yes | User Mobile No
+mobile_code | Yes | Mobile Country Code
+country_id | Yes | Country ID (From our Country URL)
+zip_code | No | zip code
+gender | No | User Gender
+address | No | Address
+business_licence | N/A | seller Business Licence Image
+shop_title | N/A | Seller Shop title
+welcome_msg | N/A | Shop welcome message
+shop_address | N/A | Shop address
+shop_zip | N/A | Shop Zip Code
+shop_mobile | N/A | Shop Mobile
+shop_mobile_code | N/A | Mobile Country code
+vat | N/A | vat
+logo | N/A | Image of shop (Image)
+header_img | N/A | Cover Image of Shop (Image)
+business_country_id | N/A | Business country ID ( From our country URL)
+bank_country_id | N/A | Seller Bank ID (From our Selected Bank Lists)
+currency | N/A | Seller Business Currency
+beneficiary_name | N/A | Bank beneficiary name
+branch_id | N/A | Bank Branch ID (From our branch URL)
+account_no | N/A | Bank account No.
+
+
 ## Get All Countries
 
 Get all countries from our table
@@ -91,7 +172,7 @@ Get all countries from our table
 
 <div class="center-column"></div>
 ```ruby
-countries/all
+countries
 ```
 
 The above command returns JSON structured like this:
@@ -131,7 +212,7 @@ Get all countries from our table
 
 <div class="center-column"></div>
 ```ruby
-country/:{code or id}
+countries/:{id}
 ```
 
 The above command returns JSON structured like this:

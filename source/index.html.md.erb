@@ -1,7 +1,7 @@
 ---
 title: API Reference
 toc_footers:
-  - <a href='https://jouleslabs.com/'>Documentation Powered by <br> JoulesLabs</a>
+  - <a href='https://witoken.global/'>Documentation Powered by <br> WiFoundation </a>
 
 includes:
   - errors
@@ -418,14 +418,46 @@ The above command returns JSON structured like this:
     },
     "gender": "male",
     "nid": "http://account.witoken.global/storage/users/images/4EYgq37ms1VodqCTxTdmulB6PQqkth2zOISUDHtB.png",
+    "nid_verified": 'Unverified/Verified/Pending/Rejected',
     "status": 1,
     "is_admin": 1,
     "seller_status": null,
     "seller_info": null,
     "bank_info": [],
-    "approved_app": []
+    "approved_app": [],
+    "qrcode_img": "http://account.witoken.global/storage/qrcodes/5d72489c09e2c.png",
 }
 ```
+
+## Update User Details
+<aside class="notice">
+Method : POST
+</aside>
+<aside class="warning">
+You must have to pass current password of the user.
+But user cannot change current Password and Email from any application.
+<b>Only from WiAccount any user can change password. </b>
+</aside>
+<div class="center-column"></div>
+```ruby
+/users
+```
+
+**Headers**
+
+Key | Value
+--------- | -------
+Accept | 'application/json'
+Content-type | 'application/json'
+Authorization | 'Bearer 'USER_ACCESS_TOKEN
+
+**Parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
+....      |...    | All your desired parameters will be added.
 
 ## User Addresses
 <aside class="notice">

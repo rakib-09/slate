@@ -80,6 +80,38 @@ $response = $http->post('http://account.witoken.global/oauth/token', [
 ```
 You will get **<code>Access_Token</code>** for further request.
 
+
+###Authentication(for mobile)
+<aside class="notice">
+  You Don't need any authorization code for this step.
+</aside>
+
+For Mobile App Development any Authorization code is not needed. So send direct request to API with user credentials.
+
+<aside class="notice">
+Method : **POST**
+</aside>
+
+<div class="center-column"></div>
+```javascript
+fetch('https://account.witoken.global/oauth/token', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify( {
+				grant_type: 'password',
+				client_id: 'YOUR_CLIENT_ID',
+				client_secret: 'YOUR_CLIENT_SECRET',
+				username: 'USER_EMAIL',
+				password: 'USER_PASSWORD',
+				device_id: 'USER_DEVICE_ID',
+				device_info: 'USER_DEVICE_INFORMATION',
+				scope: '',
+			})
+```
+
 # Public API
 
 ## User Register

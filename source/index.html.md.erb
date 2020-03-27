@@ -538,6 +538,44 @@ The above command returns JSON structured like this:
 ]
 ```
 
+## Get OTP Sending List
+Get platform based OTP Sending list
+<aside class="success">
+**Method : GET**
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/otp/get-list
+```
+
+**Headers**
+
+Key | Value
+--------- | -------
+Accept | 'application/json'
+Content-type | 'application/json'
+Authorization | 'Bearer 'USER_ACCESS_TOKEN
+
+**Parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+{
+
+    "message": true,
+    "email"  : false
+}
+```
+
+
 ## User Logout
 <aside class="notice">
 Method : POST

@@ -537,6 +537,7 @@ The above command returns JSON structured like this:
     }
 ]
 ```
+
 ## Get OTP Sending List
 Generate OTP and send to client
 <aside class="notice">
@@ -609,6 +610,44 @@ The above command returns JSON structured like this:
 
     "message": true,
     "email"  : false
+}
+```
+
+## Get OTP Sending List
+Generate OTP and send to client
+<aside class="notice">
+**Method : GET**
+</aside>
+
+<div class="center-column"></div>
+```ruby
+/otp/check
+```
+
+**Headers**
+
+Key | Value
+--------- | -------
+Accept | 'application/json'
+Content-type | 'application/json'
+Authorization | 'Bearer 'USER_ACCESS_TOKEN
+
+**Parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+otp_key   | numeric | User given OTP key
+device_id | false | user specific device_id.
+client_id | false | client_id which is assigned to that specific app.
+
+The above command returns JSON structured like this:
+
+<div class="center-column"></div>
+```json
+{
+
+    "success": true,
+    "message"  : Successful
 }
 ```
 

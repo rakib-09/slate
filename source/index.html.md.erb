@@ -1,7 +1,7 @@
 ---
 title: API Reference
 toc_footers:
-  - <a href='https://witoken.global/'>Documentation Powered by <br> WiFoundation </a>
+  - <a href='https://uaccount.asia/'>Documentation Powered by <br> uAccount </a>
 
 includes:
   - errors
@@ -11,21 +11,21 @@ search: true
 
 # Introduction
 
-Welcome to the WiAccount API! You can use our API to access Wi Eco-System API endpoints.
+Welcome to the uAccount API! You can use our API to access Wi Eco-System API endpoints.
 We developed our system using RESTful APIs that we use OAuth 2.0 for authorization.
 All request and response bodies are formatted in JSON.
 
 # Authentication & Authorization
 
-To Authenticate you have to use WiAccount API.
-The WiAccount REST API uses the OAuth 2.0 protocol to authorize calls. OAuth is an open standard that many companies use to provide secure access to protected resources.
+To Authenticate you have to use uAccount API.
+The uAccount REST API uses the OAuth 2.0 protocol to authorize calls. OAuth is an open standard that many companies use to provide secure access to protected resources.
 
 When you create an app,
 <code>
-  WiAccount generates a set of **OAuth client ID** and **secret Key** for your app.
+  uAccount generates a set of **OAuth client ID** and **secret Key** for your app.
 </code>
 
-Now, you have to hit in wiAccount <code>/oauth/authorize</code> with some specific keys for Authorization.
+Now, you have to hit in uAccount <code>/oauth/authorize</code> with some specific keys for Authorization.
 <aside class="warning">
 You must replace <code>client_id</code> <code>redirect_uri</code> <code>device_id.</code>
 </aside>
@@ -468,7 +468,7 @@ Method : POST
 <aside class="warning">
 You must have to pass current password of the user.
 But user cannot change current Password and Email from any application.
-<b>Only from WiAccount any user can change password. </b>
+<b>Only from uAccount any user can change password. </b>
 </aside>
 <div class="center-column"></div>
 ```ruby
